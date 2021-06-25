@@ -1,36 +1,8 @@
 import React, { useEffect, useRef } from 'react'
-import clsx from 'clsx'
+import { Box } from '@chakra-ui/react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core/styles'
 import doLazyLoadImages from './utils/lazyLoadImages'
 import { prefetchJsonFor } from './serviceWorker'
-
-export const styles = theme => ({
-  inline: {
-    display: 'inline',
-  },
-  block: {
-    display: 'block',
-  },
-  root: {
-    '& .rsf-presized-img': {
-      position: 'relative',
-
-      '& img': {
-        position: 'absolute',
-        height: '100%',
-        width: '100%',
-        top: 0,
-        left: 0,
-      },
-    },
-    '& img[data-src]': {
-      visibility: 'hidden',
-    },
-  },
-})
-
-const useStyles = makeStyles(styles, { name: 'RSFCmsSlot' })
 
 /**
  * A container for HTML blob content from a CMS.  Content is dangerously inserted into the DOM.
@@ -45,7 +17,6 @@ export default function CmsSlot({
   prefetchLinks,
   ...others
 }) {
-  const classes = useStyles(others)
   const el = useRef()
 
   useEffect(() => {
@@ -69,13 +40,27 @@ export default function CmsSlot({
   }, [children])
 
   return children ? (
-    <span
-      {...others}
+    <Box
+      as="span"
       ref={el}
-      className={clsx(className, classes.root, {
-        [classes.inline]: inline,
-        [classes.block]: !inline,
-      })}
+      d={inline ? 'inline' : 'block'}
+      sx={{
+        '& .rsf-presized-img': {
+          position: 'relative',
+          '& img': {
+            position: 'absolute',
+            height: '100%',
+            width: '100%',
+            top: 0,
+            left: 0,
+          },
+        },
+        '& img[data-src]': {
+          visibility: 'hidden',
+        },
+      }}
+      className={className}
+      {...others}
       dangerouslySetInnerHTML={{ __html: children }}
     />
   ) : null
