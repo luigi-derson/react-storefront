@@ -22,7 +22,6 @@ module.exports = ({
 
   return withServiceWorker({
     ...nextConfig,
-    target: 'serverless',
     webpack(config, options) {
       config.resolve.symlinks = false
 
