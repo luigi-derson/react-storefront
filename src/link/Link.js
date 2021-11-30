@@ -2,7 +2,6 @@ import React, { useContext, useRef, useEffect } from 'react'
 import NextLink from 'next/link'
 import LinkContext from './LinkContext'
 import PropTypes from 'prop-types'
-import { RootRef } from '@material-ui/core'
 import useIntersectionObserver from '../hooks/useIntersectionObserver'
 import { prefetch as doPrefetch } from '../serviceWorker'
 import withDefaultHandler from '../utils/withDefaultHandler'
@@ -56,7 +55,7 @@ const Link = ({ as, href, prefetch, prefetchURL, pageData, onClick, children, ..
 
   if (!children || typeof children === 'string') {
     return (
-      <NextLink href={href} prefetch={false} as={as} passHref>
+      <NextLink href={href} prefetch={false} passHref>
         <a ref={ref} {...other} onClick={handleClick}>
           {children}
         </a>
@@ -68,20 +67,19 @@ const Link = ({ as, href, prefetch, prefetchURL, pageData, onClick, children, ..
 
     // This way we can get a ref of Material-ui components
     return (
-      <RootRef rootRef={ref}>
-        <NextLink href={href} prefetch={false} as={as} passHref={passHref}>
-          {React.cloneElement(children, {
-            onClick: handleClick,
-            ...other,
-          })}
-        </NextLink>
-      </RootRef>
+      <NextLink href={href} prefetch={false} passHref={passHref}>
+        {React.cloneElement(children, {
+          onClick: handleClick,
+          ...other,
+        })}
+      </NextLink>
     )
   }
 }
 
 Link.propTypes = {
   /**
+   * @deprecated There is no need to use `as` prop anymore in NextJS versions > 9.5.3.
    * The URL path for the underlying anchor element's `href`.  This is required for dynamic routes.
    */
   as: PropTypes.string,

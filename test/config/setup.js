@@ -1,5 +1,5 @@
 const Enzyme = require('enzyme')
-const EnzymeAdapter = require('enzyme-adapter-react-16')
+const EnzymeAdapter = require('@wojtekmaj/enzyme-adapter-react-17')
 const sleep = require('./sleep').default
 
 // Setup enzyme's react adapter

@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import PWAContext from './PWAContext'
 import PropTypes from 'prop-types'
 import ErrorBoundary from './ErrorBoundary'
-import Router from 'next/router'
 import LinkContextProvider from './link/LinkContextProvider'
 import useSimpleNavigation from './router/useSimpleNavigation'
 import './hooks/useTraceUpdate'
@@ -42,17 +41,6 @@ export default function PWA({ children, errorReporter }) {
       <LinkContextProvider>
         <ErrorBoundary onError={errorReporter}>{children}</ErrorBoundary>
       </LinkContextProvider>
-      <style global="" jsx="">
-        {`
-          body {
-            -webkit-tap-highlight-color: transparent;
-          }
-          a {
-            color: purple;
-            text-decoration: underline;
-          }
-        `}
-      </style>
     </PWAContext.Provider>
   )
 }

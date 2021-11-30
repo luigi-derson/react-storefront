@@ -1,15 +1,15 @@
-import { red, green, blue, grey, teal, orange, purple } from '@material-ui/core/colors'
-const color = c => c.toString().replace(/\#/, '')
+// import { red, green, blue, grey, teal, orange, purple } from '@material-ui/core/colors'
+// const color = c => c.toString().replace(/\#/, '')
 
 const colors = {
-  red: { background: color(red[500]), foreground: 'ffffff' },
-  green: { background: color(green[500]), foreground: 'ffffff' },
-  blue: { background: color(blue[500]), foreground: 'ffffff' },
-  grey: { background: color(grey[300]), foreground: color(grey[600]) },
-  teal: { background: color(teal[500]), foreground: 'ffffff' },
-  orange: { background: color(orange[500]), foreground: 'ffffff' },
-  purple: { background: color(purple[500]), foreground: 'ffffff' },
-  black: { background: color(grey[800]), foreground: 'ffffff' },
+  red: { background: 'FF0000', foreground: 'ffffff' },
+  green: { background: 'FF0000', foreground: 'ffffff' },
+  blue: { background: '0000FF', foreground: 'ffffff' },
+  grey: { background: 'e5e5e5', foreground: '808080' },
+  teal: { background: '008080', foreground: 'ffffff' },
+  orange: { background: 'FFA500', foreground: 'ffffff' },
+  purple: { background: '800080', foreground: 'ffffff' },
+  black: { background: '000000', foreground: 'ffffff' },
 }
 
 export default colors

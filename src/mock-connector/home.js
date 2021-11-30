@@ -6,15 +6,14 @@ export default async function home(req, res) {
     appData: createAppData,
     pageData: () =>
       Promise.resolve({
-        title: 'React Storefront',
+        title: 'Veo | Sustainable Marketplace',
         slots: {
-          heading: 'Welcome to your new React Storefront app.',
+          heading: 'Sustainable meets quality the good stuff, no compromise',
           description: `
-                <p>
-                Here you'll find mock home, category, subcategory, product, and cart pages that you can
-                use as a starting point to build your PWA.
+              <p>
+                This is CMS content
               </p>
-              <p>Happy coding!</p>
+              <pre>Happy coding!</pre>
             `,
         },
       }),

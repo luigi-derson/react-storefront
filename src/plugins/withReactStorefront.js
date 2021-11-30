@@ -1,7 +1,7 @@
-const webpack = require('webpack')
+// const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const ClearRequireCachePlugin = require('webpack-clear-require-cache-plugin')
-const withServiceWorker = require('./withServiceWorker')
+// const withServiceWorker = require('./withServiceWorker')
 
 /**
  * @param options
@@ -20,9 +20,9 @@ module.exports = ({
     reactStorefront: { connector },
   }
 
-  return withServiceWorker({
+  return {
     ...nextConfig,
-    webpack(config, options) {
+    webpack: (config, options) => {
       config.resolve.symlinks = false
 
       if (usePreact) {
@@ -46,7 +46,7 @@ module.exports = ({
       }
 
       config.plugins.push(
-        new webpack.DefinePlugin({
+        new options.webpack.DefinePlugin({
           'process.env.RSF_PREFETCH_QUERY_PARAM': JSON.stringify(prefetchQueryParam),
           'process.env.SERVICE_WORKER': JSON.stringify(process.env.SERVICE_WORKER),
           'process.env.FIREBASE_CONFIG': JSON.stringify(process.env.FIREBASE_CONFIG),
@@ -90,5 +90,5 @@ module.exports = ({
 
       return config
     },
-  })
+  }
 }

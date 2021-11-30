@@ -15,7 +15,7 @@ export default function LinkContextProvider({ children }) {
     return () => {
       Router.events.off('routeChangeComplete', onRouteChangeComplete)
     }
-  }, [])
+  }, [Router])
 
   return <LinkContext.Provider value={linkPageData}>{children}</LinkContext.Provider>
 }
