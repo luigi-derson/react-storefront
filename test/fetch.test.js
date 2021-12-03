@@ -1,10 +1,9 @@
 describe('fetch', () => {
-  let f, fetch, originalOpen, originalFetch
+  let nextFetch, originalOpen, originalFetch
 
   beforeEach(() => {
     jest.isolateModules(() => {
-      f = jest.fn()
-      jest.doMock('isomorphic-unfetch', () => f)
+      nextFetch = jest.spyOn(global, 'fetch').mockImplementation()
       originalOpen = jest.spyOn(XMLHttpRequest.prototype, 'open')
       originalFetch = jest.spyOn(window, 'fetch').mockImplementation()
       fetch = require('../src/fetch').default
@@ -18,9 +17,9 @@ describe('fetch', () => {
     delete window.__NEXT_DATA__
   })
 
-  it('should export isomorphic-unfetch for backwards compatibility', () => {
-    fetch('/foo')
-    expect(f).toHaveBeenCalledWith('/foo')
+  it('should use Next.js fetch polyfill', () => {
+    nextFetch('/foo')
+    expect(nextFetch).toHaveBeenCalledWith('/foo')
   })
 
   it('should patch window.fetch', () => {

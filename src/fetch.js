@@ -60,4 +60,4 @@ if (typeof XMLHttpRequest !== 'undefined') {
  * When making requests to /api routes, ?__v__={next_build_id} will always be added to ensure that cached results
  * from previous versions of the app aren't served to new versions.
  */
-export default require('isomorphic-unfetch')
+export default fetch
