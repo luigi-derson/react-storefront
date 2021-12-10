@@ -63,9 +63,8 @@ const Link = ({ as, href, prefetch, prefetchURL, pageData, onClick, children, ..
     )
   } else {
     const child = React.Children.only(children)
-    const passHref = !child.props.href // we only passHref if the child does not have an href prop already.  This fixes a bug with AMP where NextLink overrides and escapes amp-bind syntax in hrefs.
+    const passHref = !child.props.href
 
-    // This way we can get a ref of Material-ui components
     return (
       <NextLink href={href} prefetch={false} passHref={passHref}>
         {React.cloneElement(children, {
@@ -79,8 +78,8 @@ const Link = ({ as, href, prefetch, prefetchURL, pageData, onClick, children, ..
 
 Link.propTypes = {
   /**
-   * @deprecated There is no need to use `as` prop anymore in NextJS versions > 9.5.3.
-   * The URL path for the underlying anchor element's `href`.  This is required for dynamic routes.
+   * Optional decorator for the path that will be shown in the browser URL bar.
+   * https://nextjs.org/docs/api-reference/next/link
    */
   as: PropTypes.string,
 

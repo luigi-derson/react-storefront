@@ -1,6 +1,4 @@
 const { join } = require('path')
-// TODO: Configure and use next-pwa or next-offline
-
 const withPWA = require('next-pwa')
 
 module.exports = function withServiceWorker(config) {
@@ -14,8 +12,20 @@ module.exports = function withServiceWorker(config) {
     ...config,
     pwa: {
       dest: 'public',
-      sw: join(process.cwd(), 'sw', 'service-worker.js'),
-      disable: process.env.NODE_ENV === 'development',
+      swSrc: join('sw', 'service-worker.js'),
+      disable: !generateInDevMode,
+      manifestTransforms: [
+        manifestEntries => {
+          console.log('> Creating service worker...')
+          const manifest = manifestEntries
+            .filter(entry => !entry.url.includes('next/dist')) // these paths fail in development resulting in the service worker not being installed
+            .map(entry => {
+              entry.url = encodeURI(entry.url)
+              return entry
+            })
+          return { manifest, warnings: [] }
+        },
+      ],
     },
   })
 }

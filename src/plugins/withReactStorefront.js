@@ -1,7 +1,7 @@
 // const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const ClearRequireCachePlugin = require('webpack-clear-require-cache-plugin')
-// const withServiceWorker = require('./withServiceWorker')
+const withServiceWorker = require('./withServiceWorker')
 
 /**
  * @param options
@@ -20,7 +20,7 @@ module.exports = ({
     reactStorefront: { connector },
   }
 
-  return {
+  return withServiceWorker({
     ...nextConfig,
     webpack: (config, options) => {
       config.resolve.symlinks = false
@@ -90,5 +90,5 @@ module.exports = ({
 
       return config
     },
-  }
+  })
 }
