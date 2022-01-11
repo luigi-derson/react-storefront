@@ -79,6 +79,7 @@ const Link = ({ as, href, prefetch, prefetchURL, pageData, onClick, children, ..
 Link.propTypes = {
   /**
    * Optional decorator for the path that will be shown in the browser URL bar.
+   * Use `href` prop instead. Note: when this path differs from the one provided in href the previous href/as behavior is used as shown in the previous docs.
    * https://nextjs.org/docs/api-reference/next/link
    */
   as: PropTypes.string,

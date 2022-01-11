@@ -1,30 +1,25 @@
 import React from 'react'
-import Link from './link/Link'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
-
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
 
 export default function Breadcrumbs({ items = [] }) {
   return (
     <Breadcrumb>
       {items.length > 0
-        ? items.map((item, i) => {
+        ? items.map(item => {
             const isLastItem = items.length - 1 === i
-            if (item.href) {
-              return (
-                <BreadcrumbItem key={i} isCurrentPage={isLastItem}>
-                  <Link href={item.href}>
-                    <BreadcrumbLink>{item.text}</BreadcrumbLink>
-                  </Link>
-                </BreadcrumbItem>
-              )
-            } else {
-              return (
-                <BreadcrumbItem key={i} isCurrentPage={isLastItem}>
-                  {item.text}
-                </BreadcrumbItem>
-              )
-            }
+            return item.href ? (
+              <BreadcrumbItem key={item.text} isCurrentPage={isLastItem}>
+                <Link href={item.href} passHref>
+                  <BreadcrumbLink>{item.text}</BreadcrumbLink>
+                </Link>
+              </BreadcrumbItem>
+            ) : (
+              <BreadcrumbItem key={item.text} isCurrentPage={isLastItem}>
+                {item.text}
+              </BreadcrumbItem>
+            )
           })
         : null}
     </Breadcrumb>
